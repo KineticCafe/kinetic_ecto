@@ -27,6 +27,7 @@ defmodule KineticEcto do
 
   ### Examples
 
+  ```elixir
   iex> KineticEcto.empty?(nil)
   true
 
@@ -62,6 +63,7 @@ defmodule KineticEcto do
 
   iex> KineticEcto.empty?({1})
   false
+  ```
   """
   def empty?(nil), do: true
   def empty?(""), do: true
@@ -85,6 +87,7 @@ defmodule KineticEcto do
 
   ### Examples
 
+  ```elixir
   iex> KineticEcto.present?(nil)
   false
 
@@ -120,6 +123,7 @@ defmodule KineticEcto do
 
   iex> KineticEcto.present?({1})
   true
+  ```
   """
   def present?(value), do: !empty?(value)
 end
