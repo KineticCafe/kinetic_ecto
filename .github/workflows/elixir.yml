@@ -40,6 +40,7 @@ jobs:
             warnings_as_errors: true
             dialyzer: true
             credo: true
+            coveralls: true
 
     runs-on: ${{ matrix.os }}
 
@@ -72,7 +73,11 @@ jobs:
       - run: mix compile
         if: ${{ !matrix.warnings_as_errors }}
 
+      - run: mix coveralls.github
+        if: ${{ matrix.coveralls }}
+
       - run: mix test
+        if: ${{ !matrix.coveralls }}
 
       - run: mix credo --strict
         if: matrix.credo
