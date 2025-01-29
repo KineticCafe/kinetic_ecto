@@ -75,6 +75,8 @@ jobs:
 
       - run: mix coveralls.github
         if: ${{ matrix.coveralls }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - run: mix test
         if: ${{ !matrix.coveralls }}
