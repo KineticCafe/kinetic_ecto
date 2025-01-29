@@ -14,7 +14,7 @@ dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:kinetic_ecto, "~> 1.0"}
+    {:kinetic_ecto, "~> 1.1"}
   ]
 end
 ```

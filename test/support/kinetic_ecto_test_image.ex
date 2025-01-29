@@ -5,7 +5,7 @@ defmodule KineticEcto.TestImage do
 
   import Ecto.Changeset
 
-  embedded_schema do
+  schema "images" do
     field :url, :string
     field :color, :string
 
