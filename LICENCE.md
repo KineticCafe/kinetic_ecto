@@ -1,8 +1,6 @@
 # Licence
 
-Enviable is copyright © 2024–2025 Austin Ziegler and is licensed under the
-[Apache License, version 2.0](licences/APACHE-2.0.txt). Portions of Enviable are
-adapted from the `System` module in [Elixir][elixir].
+KineticEcto is copyright © 2025 by Austin Ziegler.
 
 ## Developer Certificate of Origin
 
@@ -22,5 +20,66 @@ The `Signed-off-by` trailer can be automatically added by git with the `-s` or
 git commit --signoff
 ```
 
+## Acknowledgements
+
+- KineticEcto is based on code copyright © 2017-2024 by Kinetic Commerce,
+  licensed under the [Apache License, version 2.0](licences/APACHE-2.0.txt).
+
+  The following modules are based on [KineticCafe/elixir-utilities][utils] by
+  Kinetic Commerce:
+
+  - `Kinetic.Ecto`
+  - `Kinetic.Ecto.ChangsetValidations`
+
+- `Kinetic.Transact` is a near copy of `Repo.transact/2` in
+  [sasa1977/mix\_phx\_alt][mpa] by Saša Jurić, copyright © 2022-2024, licensed
+  under the MIT license.
+
+  > Copyright 2022, Saša Jurić
+  >
+  > Permission is hereby granted, free of charge, to any person obtaining a copy
+  > of this software and associated documentation files (the "Software"), to
+  > deal in the Software without restriction, including without limitation the
+  > rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  > sell copies of the Software, and to permit persons to whom the Software is
+  > furnished to do so, subject to the following conditions:
+  >
+  > The above copyright notice and this permission notice shall be included in
+  > all copies or substantial portions of the Software.
+  >
+  > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  > IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  > FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  > AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  > LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  > FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  > IN THE SOFTWARE.
+
+- Most of the SQLite unit test setup is based on
+  [elixir-sqlite/ecto\_sqlite3][ectosqlite3], copyright © 2021–2025 Matthew A.
+  Johnston, licensed under the MIT license.
+
+  > Copyright (c) 2021 Matthew A. Johnston
+  >
+  > Permission is hereby granted, free of charge, to any person obtaining a copy
+  > of this software and associated documentation files (the "Software"), to
+  > deal in the Software without restriction, including without limitation the
+  > rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  > sell copies of the Software, and to permit persons to whom the Software is
+  > furnished to do so, subject to the following conditions:
+  >
+  > The above copyright notice and this permission notice shall be included in
+  > all copies or substantial portions of the Software.
+  >
+  > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  > IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  > FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  > AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  > LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  > FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  > IN THE SOFTWARE.
+
 [trailer]: https://git-scm.com/docs/git-interpret-trailers
-[elixir]: https://github.com/elixir-lang/elixir
+[utils]: https://github.com/KineticCafe/elixir-utilities
+[mpa]: https://github.com/sasa1977/mix_phx_alt/blob/d33a67fd6b2fa0ace5b6206487e774ef7a22ce5a/lib/core/repo.ex#L6-L44
+[ectosqlite3]: https://github.com/elixir-sqlite/ecto_sqlite3

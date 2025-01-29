@@ -4,7 +4,7 @@ defmodule KineticEctoExtensions.MixProject do
   def project do
     [
       app: :kinetic_ecto,
-      version: "1.0.0",
+      version: "1.1.0",
       description: "Extensions for Ecto previously used at Kinetic Commerce",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
@@ -45,11 +45,12 @@ defmodule KineticEctoExtensions.MixProject do
     [
       {:ecto, "~> 3.10"},
       {:ecto_sql, "~> 3.10", optional: true},
-      {:postgrex, ">= 0.0.0", optional: true},
-      {:plug_crypto, "~> 1.0 or ~> 2.0", optional: true},
+      # {:postgrex, ">= 0.0.0", optional: true},
+      # {:plug_crypto, "~> 1.0 or ~> 2.0", optional: true},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:castore, "~> 1.0", only: [:test]},
+      {:ecto_sqlite3, "~> 0.17", only: [:test]},
       {:excoveralls, "~> 0.18", only: [:test]},
       {:ex_doc, "~> 0.29", only: [:dev, :test], runtime: false},
       {:styler, "~> 1.2", only: [:dev, :test], runtime: false},
