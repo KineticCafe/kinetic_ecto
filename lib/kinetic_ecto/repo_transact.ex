@@ -21,9 +21,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
-defmodule KineticEcto.Transact do
+defmodule KineticEcto.RepoTransact do
   @moduledoc """
-  Add Saša Jurić's `Repo.transact/2` to your repo with `use `KineticEcto.Transact`.
+  Add Saša Jurić's `Repo.transact/2` to your repo with `use `KineticEcto.RepoTransact`.
 
   `Repo.transact/2` is a replacement for `Repo.transaction/2` with a better developer
   experience. In many cases, the use of `Repo.transact/2` can provide code that is easier
@@ -75,7 +75,7 @@ defmodule KineticEcto.Transact do
       """
       @spec transact((-> result) | (module -> result), Keyword.t()) :: result
             when result: :ok | {:ok, any} | :error | {:error, any}
-      def transact(fun, opts \\ []), do: KineticEcto.Transact.transact(__MODULE__, fun, opts)
+      def transact(fun, opts \\ []), do: KineticEcto.RepoTransact.transact(__MODULE__, fun, opts)
     end
   end
 
@@ -118,5 +118,19 @@ defmodule KineticEcto.Transact do
     with {outcome, {^ecto_repo, :transact, outcome}}
          when outcome in [:ok, :error] <- transaction_result,
          do: outcome
+  end
+end
+
+defmodule KineticEcto.Transact do
+  @moduledoc """
+  This module has been renamed to `KineticEcto.RepoTransact` and will be removed in the
+  next major release.
+  """
+
+  @deprecated "It should be replaced with `use KineticEcto.RepoTransact`."
+  defmacro __using__(_) do
+    quote do
+      use KineticEcto.RepoTransact
+    end
   end
 end

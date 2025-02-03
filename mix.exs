@@ -4,7 +4,7 @@ defmodule KineticEctoExtensions.MixProject do
   def project do
     [
       app: :kinetic_ecto,
-      version: "1.1.0",
+      version: "1.1.1",
       description: "Extensions for Ecto previously used at Kinetic Commerce",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
