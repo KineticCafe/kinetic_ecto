@@ -1,17 +1,16 @@
-defmodule KineticEcto.TransactTest do
+defmodule KineticEcto.RepoTransactTest do
   @moduledoc false
   use KineticEcto.SqliteCase
 
   # import Ecto.Query
-
+  alias KineticEcto.RepoTransact
   alias KineticEcto.TestImage
   alias KineticEcto.TestRepo
-  alias KineticEcto.Transact
 
   describe "module transact/3" do
     test "returning :ok (fn/0)" do
       assert :ok =
-               Transact.transact(TestRepo, fn ->
+               RepoTransact.transact(TestRepo, fn ->
                  TestRepo.insert(%TestImage{color: "red"})
                  TestRepo.insert(%TestImage{color: "rouge"})
                  :ok
@@ -22,7 +21,7 @@ defmodule KineticEcto.TransactTest do
 
     test "returning :ok (fn/1)" do
       assert :ok =
-               Transact.transact(TestRepo, fn repo ->
+               RepoTransact.transact(TestRepo, fn repo ->
                  repo.insert(%TestImage{color: "red"})
                  repo.insert(%TestImage{color: "rouge"})
                  :ok
@@ -33,7 +32,7 @@ defmodule KineticEcto.TransactTest do
 
     test "returning {:ok, value}" do
       assert {:ok, image} =
-               Transact.transact(TestRepo, fn repo ->
+               RepoTransact.transact(TestRepo, fn repo ->
                  repo.insert(%TestImage{color: "blue"})
                  repo.insert(%TestImage{color: "bleu"})
                end)
@@ -45,7 +44,7 @@ defmodule KineticEcto.TransactTest do
 
     test "returning :error" do
       assert :error =
-               Transact.transact(TestRepo, fn repo ->
+               RepoTransact.transact(TestRepo, fn repo ->
                  repo.insert(%TestImage{color: "cyan"})
                  :error
                end)
@@ -57,7 +56,7 @@ defmodule KineticEcto.TransactTest do
       import Ecto.Changeset
 
       assert {:error, %{errors: [id: {"has already been taken", _}]}} =
-               Transact.transact(TestRepo, fn repo ->
+               RepoTransact.transact(TestRepo, fn repo ->
                  repo.insert(%TestImage{id: 1, color: "blue"})
 
                  %TestImage{id: 1, color: "bleu"}
@@ -71,7 +70,7 @@ defmodule KineticEcto.TransactTest do
 
     test "transact returning bare value: exception" do
       assert_raise CaseClauseError, fn ->
-        Transact.transact(TestRepo, fn repo ->
+        RepoTransact.transact(TestRepo, fn repo ->
           repo.insert!(%TestImage{color: "green"})
         end)
       end
@@ -149,6 +148,24 @@ defmodule KineticEcto.TransactTest do
       end
 
       assert TestRepo.aggregate(TestImage, :count) == 0
+    end
+  end
+
+  describe "KineticEcto.Transact" do
+    test "outputs a deprecation warning" do
+      code = """
+      defmodule KineticEcto.DeprecatedTestRepo do
+        @moduledoc false
+
+        use Ecto.Repo, otp_app: :kinetic_ecto, adapter: Ecto.Adapters.SQLite3
+        use KineticEcto.Transact
+      end
+      """
+
+      assert ExUnit.CaptureIO.capture_io(:stderr, fn ->
+               assert [{KineticEcto.DeprecatedTestRepo, _}] = Code.compile_string(code)
+             end) =~
+               ~r/`use KineticEcto.RepoTransact`/
     end
   end
 end
