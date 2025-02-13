@@ -1,5 +1,9 @@
 # KineticEcto Changelog
 
+## NEXT / YYYY-MM-DD
+
+- Fix documentation for `KineticEcto.RepoTransact`.
+
 ## 1.1.1 / 2025-02-03
 
 - Renamed `KineticEcto.Transact` to `KineticEcto.RepoTransact`.

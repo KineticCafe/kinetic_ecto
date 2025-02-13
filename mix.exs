@@ -60,7 +60,7 @@ defmodule KineticEctoExtensions.MixProject do
 
   defp docs do
     [
-      main: "README",
+      main: "readme",
       extras: [
         "README.md",
         "CONTRIBUTING.md": [filename: "CONTRIBUTING.md", title: "Contributing"],

@@ -23,11 +23,53 @@
 # IN THE SOFTWARE.
 defmodule KineticEcto.RepoTransact do
   @moduledoc """
-  Add Saša Jurić's `Repo.transact/2` to your repo with `use `KineticEcto.RepoTransact`.
+  Add Saša Jurić's `Repo.transact/2` to your repo with `use KineticEcto.RepoTransact`.
 
-  `Repo.transact/2` is a replacement for `Repo.transaction/2` with a better developer
-  experience. In many cases, the use of `Repo.transact/2` can provide code that is easier
-  to understand than an equivalent `Ecto.Multi` implementation. In Saša's own [words][1]:
+  ```elixir
+  defmodule MyApp.Repo do
+    use Ecto.Repo, otp_app: :my_app, adapter: Ecto.Adapters.Postgres
+    use KineticEcto.RepoTransact
+  end
+  ```
+
+  `transact/2` is a replacement for [`Ecto.Repo.transaction/2`][3] with a better developer
+  experience. In many cases, the use of `transact/2` can provide code that is easier to
+  understand than an equivalent implementation using `Ecto.Multi`.
+
+  As an example, a declarative user registration function might look like this example
+  from Tom Konidas's [blog post][2]:
+
+  ```elixir
+  def register_user(params) do
+    Multi.new()
+    |> Multi.insert(:user, Accounts.new_user_changeset(params))
+    |> Multi.insert(:log, fn %{user: user} -> Logs.log_action(:user_registered, %{user: user}) end)
+    |> Multi.insert(:email_job, fn %{user: user} -> Mailer.enqueue_email_confirmation(user) end)
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{user: user}} ->
+        {:ok, user}
+      {:error, _failed_operation, failed_value, _changes_so_far} ->
+        {:error, failed_value}
+    end
+  end
+  ```
+
+  But this can be simplified with `transact/2`.
+
+  ```elixir
+  def register_user(params) do
+    Repo.transact(fn ->
+      with {:ok, user} <- Accounts.create_user(params),
+           {:ok, _log} <- Logs.log_action(:user_registered, user),
+           {:ok, _job} <- Mailer.enqueue_email_confirmation(user) do
+        {:ok, user}
+      end
+    end)
+  end
+  ```
+
+  In Saša's own [words][1]:
 
   > I wrote `Repo.transact` after seeing a lot of production code along the lines of what's
   > written in that excellent [blog post][2] by @tomkonidas.
@@ -54,6 +96,7 @@ defmodule KineticEcto.RepoTransact do
 
   [1]: https://elixirforum.com/t/seeking-thoughts-on-advantages-of-the-repo-transact-pattern-vs-disadvantages-i-ve-read-about-ecto-multi/61733/2
   [2]: https://tomkonidas.com/repo-transact/
+  [3]: https://hexdocs.pm/ecto/Ecto.Repo.html#c:transaction/2
   """
 
   defmacro __using__(_) do
@@ -91,7 +134,9 @@ defmodule KineticEcto.RepoTransact do
     transaction is rolled back.
   - The result of `transact` is the value returned by the lambda.
 
-  This function accepts the same options as `Ecto.Repo.transaction/2`.
+  This function accepts the same options as [`Ecto.Repo.transaction/2`][1].
+
+  [1]: https://hexdocs.pm/ecto/Ecto.Repo.html#c:transaction/2
   """
   @spec transact(Ecto.Repo.t(), (-> result) | (module -> result), Keyword.t()) :: result
         when result: :ok | {:ok, any} | :error | {:error, any}
