@@ -54,7 +54,7 @@ defmodule KineticEctoExtensions.MixProject do
       {:excoveralls, "~> 0.18", only: [:test]},
       {:ex_doc, "~> 0.29", only: [:dev, :test], runtime: false},
       {:styler, "~> 1.2", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.13.0", only: [:dev, :test], runtime: false}
+      {:sobelow, "~> 0.14.0", only: [:dev, :test], runtime: false}
     ]
   end
 
