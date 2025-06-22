@@ -127,7 +127,8 @@ defmodule KineticEcto.ChangesetValidations.ValidateSomeRequiredTest do
       assert %Changeset{valid?: false, errors: errors} =
                validate_some_required(changeset, @fields, minimum: 3, maximum: 2)
 
-      assert {"at least 3 fields must be present", [minimum: 3, maximum: 3, fields: @fields, validation: :some_required]} =
+      assert {"at least 3 fields must be present",
+              [minimum: 3, maximum: 3, fields: @fields, validation: :some_required]} =
                Keyword.get(errors, :color)
     end
 
@@ -137,16 +138,20 @@ defmodule KineticEcto.ChangesetValidations.ValidateSomeRequiredTest do
                |> Changeset.put_change(:url, "https://example.com")
                |> validate_some_required(@fields, minimum: 2, maximum: 3)
 
-      assert {"at least 2 fields must be present", [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
+      assert {"at least 2 fields must be present",
+              [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
                Keyword.get(errors, :color)
 
-      assert {"at least 2 fields must be present", [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
+      assert {"at least 2 fields must be present",
+              [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
                Keyword.get(errors, :hsla)
 
-      assert {"at least 2 fields must be present", [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
+      assert {"at least 2 fields must be present",
+              [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
                Keyword.get(errors, :rgba)
 
-      assert {"at least 2 fields must be present", [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
+      assert {"at least 2 fields must be present",
+              [minimum: 2, maximum: 3, fields: @fields, validation: :some_required]} =
                Keyword.get(errors, :url)
     end
 

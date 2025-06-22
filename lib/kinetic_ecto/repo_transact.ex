@@ -1,3 +1,12 @@
+native_ecto_transact? =
+  case Code.fetch_docs(Ecto.Repo) do
+    {:docs_v1, _annotation, :elixir, _format, _moduledoc, _metadata, docs} ->
+      Enum.any?(docs, &match?({{:callback, :transact, 2}, _annotation, _signature, _content, _metadata}, &1))
+
+    _else ->
+      false
+  end
+
 # Code in this file is a near copy of `Repo.transact/2` in sasa1977/mix_phx_alt,
 # lib/core/repo.ex:6-44 at d33a67fd6b2fa0ace5b6206487e774ef7a22ce5a. It has been modified
 # to be easy to `use` without pasting in the implementation.
@@ -98,34 +107,46 @@ defmodule KineticEcto.RepoTransact do
   [2]: https://tomkonidas.com/repo-transact/
   [3]: https://hexdocs.pm/ecto/Ecto.Repo.html#c:transaction/2
   """
+  @moduledoc deprecated: "Ecto 3.13 introduces an official implementation of `Repo.transact/2`"
 
-  defmacro __using__(_) do
-    quote do
-      @doc """
-      Runs the given function inside a transaction.
+  @doc """
+  Adds `Repo.transact/2`.
+  """
+  @doc deprecated: "Ecto 3.13 introduces an official implementation of `Repo.transact/2`"
+  if native_ecto_transact? do
+    @deprecated "`use KineticEcto.RepoTransact` is incompatible with Ecto 3.13 or later"
+    defmacro __using__(_) do
+    end
+  else
+    defmacro __using__(_) do
+      quote do
+        @doc """
+        Runs the given function inside a transaction.
 
-      This function is a wrapper around `Ecto.Repo.transaction`, with the following
-      differences:
+        This function is a wrapper around `Ecto.Repo.transaction`, with the following
+        differences:
 
-      - It accepts only a lambda of arity 0 or 1 (i.e. it doesn't work with `Ecto.Multi`).
-      - If the lambda returns `:ok | {:ok, result}` the transaction is committed.
-      - If the lambda returns `:error | {:error, reason}` the transaction is rolled back.
-      - If the lambda returns any other kind of result, an exception is raised, and the
-        transaction is rolled back.
-      - The result of `transact` is the value returned by the lambda.
+        - It accepts only a lambda of arity 0 or 1 (i.e. it doesn't work with `Ecto.Multi`).
+        - If the lambda returns `:ok | {:ok, result}` the transaction is committed.
+        - If the lambda returns `:error | {:error, reason}` the transaction is rolled back.
+        - If the lambda returns any other kind of result, an exception is raised, and the
+          transaction is rolled back.
+        - The result of `transact` is the value returned by the lambda.
 
-      This function accepts the same options as `Ecto.Repo.transaction/2`.
-      """
-      @spec transact((-> result) | (module -> result), Keyword.t()) :: result
-            when result: :ok | {:ok, any} | :error | {:error, any}
-      def transact(fun, opts \\ []), do: KineticEcto.RepoTransact.transact(__MODULE__, fun, opts)
+        This function accepts the same options as `Ecto.Repo.transaction/2`.
+        """
+        @spec transact((-> result) | (module -> result), Keyword.t()) :: result
+              when result: :ok | {:ok, any} | :error | {:error, any}
+        def transact(fun, opts \\ []), do: KineticEcto.RepoTransact.transact(__MODULE__, fun, opts)
+      end
     end
   end
 
   @doc """
   Runs the given function inside a transaction for the provided Ecto repo.
 
-  This function is a wrapper around `Ecto.Repo.transaction`, with the following differences:
+  This function is a wrapper around `Ecto.Repo.transaction/2`, with the following
+  differences:
 
   - It accepts only a lambda of arity 0 or 1 (i.e. it doesn't work with `Ecto.Multi`).
   - If the lambda returns `:ok | {:ok, result}` the transaction is committed.
@@ -137,7 +158,16 @@ defmodule KineticEcto.RepoTransact do
   This function accepts the same options as [`Ecto.Repo.transaction/2`][1].
 
   [1]: https://hexdocs.pm/ecto/Ecto.Repo.html#c:transaction/2
+
+  > #### Future Incompatibility {: .error}
+  >
+  > Ecto 3.13 or later defines `Repo.transact/2` to replace `Repo.transaction/2`. This is
+  > mostly good, but importantly it works _differently_ than the version of `transact/2`
+  > defined here in that it works with Ecto.Multi and the function version requires
+  > `{:ok, result}` and `{:error, reason}` responses and does not work with `:ok` and
+  > `:error` responses.
   """
+  @doc deprecated: "This function is unnecessary with Ecto 3.13 or later"
   @spec transact(Ecto.Repo.t(), (-> result) | (module -> result), Keyword.t()) :: result
         when result: :ok | {:ok, any} | :error | {:error, any}
   def transact(ecto_repo, fun, opts \\ []) do
@@ -171,8 +201,14 @@ defmodule KineticEcto.Transact do
   This module has been renamed to `KineticEcto.RepoTransact` and will be removed in the
   next major release.
   """
+  @moduledoc deprecated: "Ecto 3.13 introduces an official implementation of `Repo.transact/2`"
 
-  @deprecated "It should be replaced with `use KineticEcto.RepoTransact`."
+  if native_ecto_transact? do
+    @deprecated "`use KineticEcto.RepoTransact` is incompatible with Ecto 3.13 or later"
+  else
+    @deprecated "Replace with `use KineticEcto.RepoTransact`"
+  end
+
   defmacro __using__(_) do
     quote do
       use KineticEcto.RepoTransact

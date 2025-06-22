@@ -118,7 +118,8 @@ defmodule KineticEcto.ChangesetValidations do
 
   defp validate_some_required(changeset, _fields, 0, nil, _count, _opts), do: changeset
 
-  defp validate_some_required(changeset, fields, count, _max, count, opts), do: validate_required(changeset, fields, opts)
+  defp validate_some_required(changeset, fields, count, _max, count, opts),
+    do: validate_required(changeset, fields, opts)
 
   defp validate_some_required(changeset, fields, min, max, _count, opts) do
     present = Enum.count(fields, &field_present?(changeset, &1))
