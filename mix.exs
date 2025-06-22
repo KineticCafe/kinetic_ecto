@@ -1,10 +1,13 @@
 defmodule KineticEctoExtensions.MixProject do
   use Mix.Project
 
+  alias KineticEcto.TestImage.HSLA
+  alias KineticEcto.TestImage.RGBA
+
   def project do
     [
       app: :kinetic_ecto,
-      version: "1.1.1",
+      version: "1.2.0",
       description: "Extensions for Ecto previously used at Kinetic Commerce",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
@@ -53,7 +56,7 @@ defmodule KineticEctoExtensions.MixProject do
       {:ecto_sqlite3, "~> 0.17", only: [:test]},
       {:excoveralls, "~> 0.18", only: [:test]},
       {:ex_doc, "~> 0.29", only: [:dev, :test], runtime: false},
-      {:styler, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:quokka, "~> 2.0", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.14.0", only: [:dev, :test], runtime: false}
     ]
   end
@@ -87,7 +90,7 @@ defmodule KineticEctoExtensions.MixProject do
   defp test_coverage do
     [
       tool: ExCoveralls,
-      ignore_modules: [KineticEcto.TestImage, KineticEcto.TestImage.HSLA, KineticEcto.TestImage.RGBA]
+      ignore_modules: [KineticEcto.TestImage, HSLA, RGBA]
     ]
   end
 end

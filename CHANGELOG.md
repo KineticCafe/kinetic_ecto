@@ -1,8 +1,12 @@
 # KineticEcto Changelog
 
-## NEXT / YYYY-MM-DD
+## 1.2.0 / 2025-06-30
 
-- Fix documentation for `KineticEcto.RepoTransact`.
+- Disabled `use KineticEcto.RepoTransact` if Ecto 3.13 or later is installed, as
+  it prevents compiling as the Ecto implementation of `Repo.transact/2` is not
+  marked `overridable` and causes build failures.
+
+  Unit tests for `KineticEcto.RepoTransact` were also removed.
 
 ## 1.1.1 / 2025-02-03
 

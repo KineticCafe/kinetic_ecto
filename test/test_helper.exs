@@ -25,7 +25,7 @@ alias KineticEcto.TestRepo
 Logger.configure(level: :info)
 
 Application.put_env(:kinetic_ecto, TestRepo,
-  adapter: Ecto.Adapters.SQLite3,
+  adapter: SQLite3,
   database: "/tmp/kinetic_ecto_test_#{Ecto.UUID.generate()}.db",
   pool: Ecto.Adapters.SQL.Sandbox,
   show_sensitive_data_on_connection_error: true
