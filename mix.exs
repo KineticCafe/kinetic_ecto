@@ -23,11 +23,6 @@ defmodule KineticEctoExtensions.MixProject do
           "Issues" => "https://github.com/KineticCafe/kinetic_ecto/issues"
         }
       ],
-      preferred_cli_env: [
-        coveralls: :test,
-        "coveralls.github": :test,
-        "coveralls.html": :test
-      ],
       test_coverage: test_coverage(),
       elixirc_paths: elixirc_paths(Mix.env()),
       dialyzer: [
@@ -41,6 +36,16 @@ defmodule KineticEctoExtensions.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
+        coveralls: :test,
+        "coveralls.github": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
