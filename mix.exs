@@ -53,8 +53,8 @@ defmodule KineticEctoExtensions.MixProject do
     [
       {:ecto, "~> 3.10"},
       {:ecto_sql, "~> 3.10", optional: true},
-      # {:postgrex, ">= 0.0.0", optional: true},
-      # {:plug_crypto, "~> 1.0 or ~> 2.0", optional: true},
+      {:postgrex, ">= 0.0.0", optional: true},
+      {:plug_crypto, "~> 1.0 or ~> 2.0", optional: true},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:castore, "~> 1.0", only: [:test]},

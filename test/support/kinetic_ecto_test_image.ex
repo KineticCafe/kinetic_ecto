@@ -2,6 +2,7 @@ defmodule KineticEcto.TestImage do
   @moduledoc false
 
   use Ecto.Schema
+  use KineticEcto.Schema
 
   import Ecto.Changeset
 
