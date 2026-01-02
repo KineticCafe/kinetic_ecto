@@ -1,5 +1,7 @@
 # Licence
 
+- SPDX-Licence-Identifier: [Apache-2.0][apache-2]
+
 KineticEcto is copyright © 2025 by Austin Ziegler.
 
 ## Developer Certificate of Origin
@@ -79,7 +81,8 @@ git commit --signoff
   > FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   > IN THE SOFTWARE.
 
+[apache-2]: https://spdx.org/licenses/Apache-2.0.html
+[ectosqlite3]: https://github.com/elixir-sqlite/ecto_sqlite3
+[mpa]: https://github.com/sasa1977/mix_phx_alt/blob/d33a67fd6b2fa0ace5b6206487e774ef7a22ce5a/lib/core/repo.ex#L6-L44
 [trailer]: https://git-scm.com/docs/git-interpret-trailers
 [utils]: https://github.com/KineticCafe/elixir-utilities
-[mpa]: https://github.com/sasa1977/mix_phx_alt/blob/d33a67fd6b2fa0ace5b6206487e774ef7a22ce5a/lib/core/repo.ex#L6-L44
-[ectosqlite3]: https://github.com/elixir-sqlite/ecto_sqlite3
