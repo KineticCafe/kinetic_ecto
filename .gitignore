@@ -6,6 +6,6 @@
 /deps/
 /doc/
 /tmp/
-enviable-*.tar
+kinetic_ecto-*.tar
 erl_crash.dump
 /priv/plts/

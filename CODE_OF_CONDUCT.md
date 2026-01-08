@@ -162,5 +162,5 @@ community guideline resources can be found at
 <https://www.contributor-covenant.org/resources>. The enforcement ladder was
 inspired by the work of [Mozilla’s code of conduct team][inclusion].
 
-[advisory]: https://github.com/halostatue/kinetic_ecto/security/advisories/new
+[advisory]: https://github.com/KineticCafe/kinetic_ecto/security/advisories/new
 [inclusion]: https://github.com/mozilla/inclusion

@@ -1,12 +1,12 @@
 # Contributing
 
-Contribution to Enviable is encouraged: bug reports, discussions, feature
+Contribution to KineticEcto is encouraged: bug reports, discussions, feature
 requests, or code contributions. New features should be proposed and discussed
 in an [issue][issues].
 
 Before contributing patches, please read the [Licence](./LICENCE.md).
 
-Enviable is governed under the [Contributor Covenant Code of Conduct][cccoc].
+KineticEcto is governed under the [Contributor Covenant Code of Conduct][cccoc].
 
 ## Code Guidelines
 
@@ -40,7 +40,7 @@ I have several guidelines to contributing code through pull requests:
 
 ## AI Contribution Policy
 
-Enviable contributions must be well understood by the submitter and that the
+KineticEcto contributions must be well understood by the submitter and that the
 developer can attest to the [Developer Certificate of Origin][dco] for each pull
 request (see [LICENCE](LICENCE.md)).
 
@@ -49,7 +49,7 @@ output will be rejected.
 
 ## Commit Conventions
 
-Enviable has adopted a variation of the Conventional Commits format for commit
+KineticEcto has adopted a variation of the Conventional Commits format for commit
 messages. The following types are permitted:
 
 | Type    | Purpose                                               |
@@ -85,7 +85,7 @@ required metadata trailers are:
 
 ## Contributors
 
-Austin Ziegler created Enviable.
+Austin Ziegler created KineticEcto.
 
 [cbeams]: https://cbea.ms/git-commit/
 [cccoc]: ./CODE_OF_CONDUCT.md
@@ -93,7 +93,7 @@ Austin Ziegler created Enviable.
 [credo]: https://github.com/rrrene/credo
 [dco]: licences/dco.txt
 [exunit]: https://hexdocs.pm/ex_unit/ExUnit.html
-[issues]: https://github.com/halostatue/kinetic_ecto/issues
+[issues]: https://github.com/KineticCafe/kinetic_ecto/issues
 [quokka]: https://github.com/emkguts/quokka
 [tpope-qcm]: https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [trailers1]: https://git-scm.com/docs/git-interpret-trailers

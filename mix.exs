@@ -16,7 +16,7 @@ defmodule KineticEctoExtensions.MixProject do
       source_url: "https://github.com/KineticCafe/kinetic_ecto",
       docs: docs(),
       package: [
-        files: ~w(lib .formatter.exs mix.exs *.md),
+        files: ~w(lib .formatter.exs mix.exs *.md licenses),
         licenses: ["Apache-2.0"],
         links: %{
           "Source" => "https://github.com/KineticCafe/kinetic_ecto",
